@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.fragmentarticleexample.R;
 
+import org.w3c.dom.Text;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link BlankFragment#newInstance} factory method to
@@ -23,12 +25,13 @@ public class BlankFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static int YES = 0;
-    private static int NO = 1;
+    private static final int YES = 0;
+    private static final int NO = 1;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public BlankFragment() {
         // Required empty public constructor
@@ -68,22 +71,25 @@ public class BlankFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_blank, container, false);
         final RadioGroup radioGroup = rootView.findViewById(R.id.radioGroup);
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.onChekedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                View radioButton = radioGroup.findViewById(checkedId);
-                int i = radioGroup.indexOfChild(radioButton);
-                TextView textView = rootView.findViewById(R.id.fragmentHeader);
-                switch (i) {
-                    case YES: textView.setText(R.string.Like);
-                    break;
-                    case NO: textView.setText(R.string.dislake);
-                    break;
-                    default:
-                        break; //TODO
-                }
-            }
-    });
+       radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(RadioGroup group, int checkedId) {
+               View radioButton = radioGroup.findViewById(checkedId);
+               int i = radioGroup.indexOfChild(radioButton);
+               TextView textView = rootView.findViewById(R.id.fragmentHeader);
+               switch (i) {
+                   case YES:
+                       textView.setText(R.string.Like);
+                       break;
+                   case NO:
+                       textView.setText(R.string.dislake);
+                       break;
+                   default:
+                       break;
+               }
+           }
+       });
+
 
 
         return rootView;
